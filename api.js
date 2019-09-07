@@ -3,16 +3,6 @@ require('dotenv').config();
 const Synapse = require('synapsenode');
 const Client = Synapse.Client;
 
-// const env = {
-//   client_id: 'client_id_XACzZJLcH0BNnQ10ul9b7kwYGx2Th5EV8mjdrptU',
-//   client_secret: 'client_secret_KUu4ECvzw0VSn51riqo6FjTcQdReGLbZsMOYlB3J',
-//   fingerprint: '08e80b5d3e03516cb2ea76412a232272',
-//   ip_address: '127.0.0.1',
-//   isProduction: false
-// }
-
-// const client = new Client(env);
-
 const client = new Client({
   client_id: process.env.CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET,
