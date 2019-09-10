@@ -1,18 +1,50 @@
-import { ADD_DONOR, DELETE_DONOR } from '../constants';
+import client from '../client.js';
+import { 
+    REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS, INVALIDATE_USER 
+} from '../constants';
 
-export const addDonor = (text) => {
-    const action = {
-        type: ADD_DONOR,
-        text
+export const invalidateUser = currentUser => ({
+    type: INVALIDATE_USER,
+    currentUser
+});
+
+export const requestTransactions = currentUser => ({
+    type: REQUEST_TRANSACTIONS,
+    currentUser
+});
+
+export const receiveTransactions = (currentUser, transactions) => ({
+    type: RECEIVE_TRANSACTIONS,
+    currentUser,
+    transactions: transactions,
+    receivedAt: Date.now()
+});
+
+const fetchTransactions = currentUser => async dispatch => {
+    dispatch(requestTransactions(currentUser));
+    try {
+        const user = await client.getUser(currentUser);
+        const { data } = user.getUserTransactions();
+        dispatch(receiveTransactions(currentUser, data.trans));
     }
-    return action;
+    catch (error) {
+        console.log(error);
+    }
 }
 
-export const deleteDonor = (id) => {
-    const action = {
-        type: DELETE_DONOR,
-        id
+const shouldFetchTransactions = (state, currentUser) => {
+    const transactions = state.transactionsByUser[ currentUser];
+    if(!transactions) {
+        return true;
     }
-    console.log('deleting in actions', action);
-    return action;
+    if (transactions.isFetching) {
+        return false;
+    }
+    return transactions.didInvalidate;
+}
+
+export const fetchTransactionsIfNeeded = currentUser => (dispatch, getState) => {
+    if(shouldFetchTransactions(getState(), currentUser)) {
+        return dispatch(fetchTransactions(currentUser));
+    }
 }

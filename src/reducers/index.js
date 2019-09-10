@@ -1,30 +1,54 @@
-import { ADD_DONOR, DELETE_DONOR } from '../constants';
+import { combineReducers } from 'redux';
+import {
+  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS, INVALIDATE_USER
+} from '../constants';
 
-const donor = (action) => {
-    return {
-        text: action.text,
-        id: Math.random()
-    }
+const transactions = (state = {
+  isFetching: false,
+  didInvalidate: false,
+  items: []
+}, action) => {
+  switch (action.type) {
+    case INVALIDATE_USER:
+      return {
+        ...state,
+        didInvalidate: true
+      };
+    case REQUEST_TRANSACTIONS:
+      return {
+        ...state,
+        isFetching: true,
+        didInvalidate: false
+      };
+    case RECEIVE_TRANSACTIONS:
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        items: action.transactions,
+        lastUpdated: action.receivedAt
+      };
+    default:
+      return state;
+  }
 }
 
-const removeById = (state = [], id) => {
-    const donors = state.filter(donor => donor.id !== id);
-    return donors;
+const transactionsByUser = (state = { }, action) => {
+  switch (action.type) {
+    case INVALIDATE_USER:
+    case RECEIVE_TRANSACTIONS:
+    case REQUEST_TRANSACTIONS:
+      return {
+        ...state,
+        [action.currentUser]: transactions(state[action.currentUser], action)
+      };
+    default:
+      return state;
+  }
 }
 
-const donors = (state = [], action) => {
-    let donors = null;
-    switch(action.type) {
-        case ADD_DONOR: 
-            donors = [...state, donor(action)]
-            console.log('donors as state', donors);
-            return donors;
-        case DELETE_DONOR:
-            donors = removeById(state, action.id);
-            return donors;
-        default:
-            return state;
-    }
-}
+const rootReducer = combineReducers({
+  transactionsByUser
+});
 
-export default donors;
+export default rootReducer;
