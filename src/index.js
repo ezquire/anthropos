@@ -21,6 +21,8 @@ const store = createStore(
 store
   .dispatch(fetchTransactionsIfNeeded('5d746f6e8843a6305f774dbf'))
   .then(() => console.log(store.getState()))
+
+
 // ReactDOM.render(
 //   <Provider store={store}>
 //     <App />

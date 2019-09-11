@@ -17,16 +17,9 @@ export const receiveTransactions = (currentUser, transactions) => ({
 
 const fetchTransactions = currentUser => dispatch => {
   dispatch(requestTransactions(currentUser));
-  return fetch('/api/test')
-    .then(res => res.json())
-    .then(res => {
-      if(res.error) {
-        throw(res.error);
-      }
-    })
-    .catch(error => {
-      console.log(error);
-    })
+  return fetch(`/api/${currentUser}/transactions`)
+    .then(response => response.json())
+    .then(json => console.log(json))
 }
 
 const shouldFetchTransactions = (state, currentUser) => {
@@ -43,7 +36,5 @@ const shouldFetchTransactions = (state, currentUser) => {
 export const fetchTransactionsIfNeeded = currentUser => (dispatch, getState) => {
   if (shouldFetchTransactions(getState(), currentUser)) {
     return dispatch(fetchTransactions(currentUser));
-  } else {
-    return Promise.resolve();
   }
 }
