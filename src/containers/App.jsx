@@ -3,18 +3,9 @@ import { connect } from 'react-redux';
 import Navigation from '../components/Nav';
 import RecentTrans from './RecentTrans';
 import '../App.css';
-import { 
-  fetchTransactionsIfNeeded, invalidateUser 
-} from '../actions';
+import { fetchTransactionsIfNeeded } from '../actions';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentUser: '5d746f6e8843a6305f774dbf',
-    }
-  }
-
   componentDidMount() {
     const { dispatch, currentUser } = this.props;
     dispatch(fetchTransactionsIfNeeded(currentUser));
@@ -27,12 +18,12 @@ class App extends Component {
     }
   }
 
-  handleRefreshClick = event => {
-    event.preventDefault();
-    const { dispatch, currentUser } = this.props;
-    dispatch(invalidateUser(currentUser));
-    dispatch(fetchTransactionsIfNeeded(currentUser));
-  }
+  // handleRefreshClick = event => {
+  //   event.preventDefault();
+  //   const { dispatch, currentUser } = this.props;
+  //   dispatch(invalidateUser(currentUser));
+  //   dispatch(fetchTransactionsIfNeeded(currentUser));
+  // }
 
   render() {
     const { currentUser, transactions, isFetching, lastUpdated } = this.props;

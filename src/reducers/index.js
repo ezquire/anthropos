@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import {
-  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS, INVALIDATE_USER
+  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS
 } from '../constants';
 
 const transactions = (state = {
@@ -9,11 +9,6 @@ const transactions = (state = {
   items: []
 }, action) => {
   switch (action.type) {
-    case INVALIDATE_USER:
-      return {
-        ...state,
-        didInvalidate: true
-      };
     case REQUEST_TRANSACTIONS:
       return {
         ...state,
@@ -35,7 +30,6 @@ const transactions = (state = {
 
 const transactionsByUser = (state = { }, action) => {
   switch (action.type) {
-    case INVALIDATE_USER:
     case RECEIVE_TRANSACTIONS:
     case REQUEST_TRANSACTIONS:
       return {
