@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import App from './containers/App';
 import reducer from './reducers';
-import { fetchTransactionsIfNeeded } from './actions';
+// import { fetchTransactionsIfNeeded } from './actions';
 
 const middleware = [thunk]
 if (process.env.NODE_ENV !== 'production') {
@@ -18,13 +18,12 @@ const store = createStore(
   applyMiddleware(...middleware)
 );
 
-store
-  .dispatch(fetchTransactionsIfNeeded('5d746f6e8843a6305f774dbf'))
-  .then(() => console.log(store.getState()))
+// store
+//   .dispatch(fetchTransactionsIfNeeded('5d746f6e8843a6305f774dbf'))
+//   .then(() => console.log(store.getState()))
 
-
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <App />
-//   </Provider>, document.getElementById('root')
-// );
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>, document.getElementById('root')
+);

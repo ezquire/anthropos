@@ -29,8 +29,15 @@ app.get('/api/:user', (req, res) => {
     .catch(error => console.log(error));
 });
 
-app.get('/api/:user/transactions', (req, res) => {
-  res.send({ call: req.params.user });
+app.get('/api/:user/recent-transactions', (req, res) => {
+  const options = {
+    page: 1,
+    per_page: 4
+  }
+  client.getUser(req.params.user)
+    .then(user => user.getUserTransactions(options))
+    .then(({ data }) => res.send(data))
+    .catch(error => console.log(error));
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

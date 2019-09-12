@@ -1,7 +1,6 @@
 import {
   REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS
-} from '../constants';
-
+} from '../constants'; 
 
 export const requestTransactions = currentUser => ({
   type: REQUEST_TRANSACTIONS,
@@ -11,15 +10,15 @@ export const requestTransactions = currentUser => ({
 export const receiveTransactions = (currentUser, transactions) => ({
   type: RECEIVE_TRANSACTIONS,
   currentUser,
-  transactions: transactions.map(),
+  transactions: transactions,
   receivedAt: Date.now()
 });
 
 const fetchTransactions = currentUser => dispatch => {
   dispatch(requestTransactions(currentUser));
-  return fetch(`/api/${currentUser}`)
+  return fetch(`/api/${currentUser}/recent-transactions`)
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(json => dispatch(receiveTransactions(currentUser, json.trans)))
 }
 
 const shouldFetchTransactions = (state, currentUser) => {

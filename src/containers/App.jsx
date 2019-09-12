@@ -6,6 +6,7 @@ import '../App.css';
 import { fetchTransactionsIfNeeded } from '../actions';
 
 class App extends Component {
+
   componentDidMount() {
     const { dispatch, currentUser } = this.props;
     dispatch(fetchTransactionsIfNeeded(currentUser));
@@ -18,15 +19,8 @@ class App extends Component {
     }
   }
 
-  // handleRefreshClick = event => {
-  //   event.preventDefault();
-  //   const { dispatch, currentUser } = this.props;
-  //   dispatch(invalidateUser(currentUser));
-  //   dispatch(fetchTransactionsIfNeeded(currentUser));
-  // }
-
   render() {
-    const { currentUser, transactions, isFetching, lastUpdated } = this.props;
+    const { transactions, isFetching } = this.props;
     const isEmpty = transactions.length === 0;
     return (
       <div className="App">
@@ -42,7 +36,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { currentUser, transactionsByUser } = state;
+  const { currentUser = '5d746f6e8843a6305f774dbf', transactionsByUser } = state;
   const {
     isFetching,
     lastUpdated,
