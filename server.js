@@ -1,5 +1,17 @@
+require('dotenv').config();
+
 const express = require('express'),
-      bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  Synapse = require('synapsenode'),
+  Client = Synapse.Client;
+
+const client = new Client({
+  client_id: process.env.CLIENT_ID,
+  client_secret: process.env.CLIENT_SECRET,
+  fingerprint: process.env.FINGERPRINT,
+  ip_address: '127.0.0.1',
+  isProduction: false
+});
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -12,12 +24,13 @@ app.get('/api/test', (req, res) => {
 });
 
 app.get('/api/:user', (req, res) => {
-  const user = synapse_client.getUser(req.params.user)
-  res.send(user);
+  client.getUser(req.params.user)
+    .then(user => res.send(user))
+    .catch(error => console.log(error));
 });
 
 app.get('/api/:user/transactions', (req, res) => {
-  res.send({call: req.params.user });
+  res.send({ call: req.params.user });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

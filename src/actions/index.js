@@ -17,7 +17,7 @@ export const receiveTransactions = (currentUser, transactions) => ({
 
 const fetchTransactions = currentUser => dispatch => {
   dispatch(requestTransactions(currentUser));
-  return fetch(`/api/${currentUser}/transactions`)
+  return fetch(`/api/${currentUser}`)
     .then(response => response.json())
     .then(json => console.log(json))
 }
