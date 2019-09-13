@@ -1,15 +1,23 @@
 import React from 'react';
 import './Transactions.css';
 
-const getTransactionDate = ({ transaction }) => {
-
+const formatTransactionDate = ({ transaction }) => {
+  var a = new Date(transaction.extra.created_on);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var day = a.getDate();
+  var month = months[a.getMonth()];
+  return month + ' ' + day;
 }
 
-const getTransactionNickname = ({ transaction }) => {
-
+const formatTransactionNickname = ({ transaction }) => {
+  if(transaction.from.id !== null) {
+    return transaction.to.id || "Unknown";
+  } else {
+    return transaction.from.nickname || "Unknown";
+  }
 }
 
-const getTransactionAmount = ({ transaction }) => {
+const formatTransactionAmount = ({ transaction }) => {
   let amount = ""
   switch (transaction.amount.currency) {
     case 'USD':
@@ -32,10 +40,10 @@ const Transactions = ({ transactions }) => (
     {
       transactions.map((transaction, i) => (
         <div key={i}>
-          <div>
-            <span className="date">{getTransactionDate({ transaction })}</span>
-            <span className="nickname">{getTransactionNickname({ transaction })}</span>
-            <span className="amount">{getTransactionAmount({ transaction })}</span>
+          <div className="transaction">
+            <span className="date">{formatTransactionDate({ transaction })}</span>
+            <span className="nickname">{formatTransactionNickname({ transaction })}</span>
+            <div className="amount">{formatTransactionAmount({ transaction })}</div>
           </div>
           <hr />
         </div>))
