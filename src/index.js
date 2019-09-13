@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
-import App from './containers/App';
+import App from './containers/App/App';
 import reducer from './reducers';
 // import { fetchTransactionsIfNeeded } from './actions';
 

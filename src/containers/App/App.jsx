@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Navigation from '../components/Nav';
-import RecentTrans from './RecentTrans';
-import '../App.css';
-import { fetchTransactionsIfNeeded } from '../actions';
+import Navigation from '../../components/Nav';
+import RecentTrans from '../RecentTrans/RecentTrans';
+import './App.css';
+import { fetchTransactionsIfNeeded } from '../../actions';
 
 class App extends Component {
 
@@ -22,12 +22,13 @@ class App extends Component {
   render() {
     const { transactions, isFetching } = this.props;
     const isEmpty = transactions.length === 0;
+    console.log("transactions in App.jsx:", transactions);
     return (
       <div className="App">
         <Navigation />
         { isEmpty ? (isFetching ? <h2>Loading...</h2> : <h2>No Recent Transactions</h2>) : 
           <div style={{ opacity: isFetching ? 0.5 : 1}}>
-            <RecentTrans trasactions={transactions}/>
+            <RecentTrans transactions={transactions}/>
           </div>
         }
       </div>

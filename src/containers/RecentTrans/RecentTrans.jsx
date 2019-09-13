@@ -1,15 +1,14 @@
 import React from 'react';
-import Transactions from '../components/Transactions';
+import Transactions from '../../components/Transactions/Transactions';
 import Card from 'react-bootstrap/Card';
 
 const RecentTrans = ({ transactions }) => (
   <Card style={{ width: '18rem' }}>
     <Card.Body>
       <Card.Title>Hi Person!</Card.Title>
-      <Card.Subtitle className="mb-2 text-muted">Company</Card.Subtitle>
-      <Card.Text>
-        <Transactions transactions={transactions}/>
-      </Card.Text>
+      <Card.Subtitle className="mb-2 text-muted">Here are your recent transactions</Card.Subtitle>
+      <hr />
+      <Transactions transactions={transactions} />
     </Card.Body>
   </Card>
 );

@@ -10,7 +10,7 @@ export const requestTransactions = currentUser => ({
 export const receiveTransactions = (currentUser, transactions) => ({
   type: RECEIVE_TRANSACTIONS,
   currentUser,
-  transactions: transactions,
+  transactions,
   receivedAt: Date.now()
 });
 

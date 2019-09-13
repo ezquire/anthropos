@@ -11,18 +11,28 @@ const client = new Client({
   isProduction: false
 });
 
-const nodeOptions = {
-  type: 'DEPOSIT-US',
-  info: {
-    nickname: 'Test Checking'
-  }
-}
+// const body = {
+//   "type": "ACH-US",
+//   "info": {
+//     "nickname": "Fake Account",
+//     "account_num": "1232225674134",
+//     "routing_num": "051000017",
+//     "type": "PERSONAL",
+//     "class": "CHECKING"
+//   }
+// }
 
-const user = client.getUser('5d746f6e8843a6305f774dbf');
+// client.getUser('5d746f6e8843a6305f774dbf')
+//     .then(user => user.createNode(body))
+//     .then(({ data }) => console.log(data))
+//     .catch(error => console.log(error))
 
-user.createNode(nodeOptions);
+// client.getUser('5d746f6e8843a6305f774dbf')
+//   .then(user => user.triggerDummyTransactions('5d7ab1b80b8bf3010345e8bb'))
+//   .then(({ data }) => console.log('data ', data))
+//   .catch(error => console.log(error))
 
-user.triggerDummyTransactions('<NODE_ID>')
-  .then(({ data }) => {
-    console.log('data ', data);
-  });
+client.getUser('5d746f6e8843a6305f774dbf')
+  .then(user => user.getUserTransactions())
+  .then(({ data }) => console.log(data.trans))
+  .catch(error => console.log(error));
