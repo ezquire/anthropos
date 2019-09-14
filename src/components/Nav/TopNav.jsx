@@ -2,8 +2,8 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-const Navigation = () => (
-  <Navbar collapseOnSelect expand="lg" bg="light" variant="light" fixed="left">
+const TopNav = () => (
+  <Navbar collapseOnSelect expand="md" bg="light" variant="light" fixed="top">
     <Navbar.Brand href="#home">Anthropos</Navbar.Brand>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
@@ -18,4 +18,4 @@ const Navigation = () => (
   </Navbar>
 );
 
-export default Navigation;
+export default TopNav;

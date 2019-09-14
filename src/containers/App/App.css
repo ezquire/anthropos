@@ -6,4 +6,9 @@
 .App {
   font-family: Rubik;
   text-align: center;
+  margin-top: 55px;
+}
+
+#sidenav {
+  background: #ddd;
 }
