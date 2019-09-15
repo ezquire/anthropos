@@ -1,0 +1,24 @@
+.SideNav {
+    background-color: #eefbfc;  
+    text-align: left;
+    height: 100%;
+}
+
+.navigation {
+  background-color: #eefbfc; 
+  width: 100%;
+  padding: 0;
+}
+
+.links {
+  width: 100%;
+}
+
+a.nav-link {
+  padding: 1rem 0 1rem 2rem !important;
+  box-sizing: padding-box;
+}
+
+a.active {
+  background-color: #fff !important;
+}

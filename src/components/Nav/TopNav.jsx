@@ -1,10 +1,10 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import './TopNav.css'
 
 const TopNav = () => (
-  <Navbar collapseOnSelect expand="md" bg="light" variant="light" fixed="top">
-    <Navbar.Brand href="#home">Anthropos</Navbar.Brand>
+  <Navbar collapseOnSelect expand="md" className="topnav">
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="mr-auto">

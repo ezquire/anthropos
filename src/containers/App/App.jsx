@@ -28,13 +28,13 @@ class App extends Component {
     const isEmpty = transactions.length === 0;
     console.log("transactions in App.jsx:", transactions);
     return (
-      <div className="App" style={{ height: '100%'}}>
-        <TopNav />
-        <Row style={{ height: '100%'}}>
-          <Col sm='2' lg='2' id="sidenav">
+      <div className="App">
+        <Row style={{ height: "100%" }} noGutters="true">
+          <Col sm='2' lg='2'>
             <SideNav />
           </Col>
           <Col>
+            <TopNav />
             {isEmpty ? (isFetching ? <h2>Loading...</h2> : <h2>No Recent Transactions</h2>) :
               <Container style={{ opacity: isFetching ? 0.5 : 1 }}>
                 <RecentTrans transactions={transactions} />
