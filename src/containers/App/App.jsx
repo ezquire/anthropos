@@ -1,13 +1,22 @@
+// React + Redux
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+// Components
 import TopNav from '../../components/Nav/TopNav';
 import SideNav from '../../components/Nav/SideNav';
+
+// Containers
+import RecentTrans from '../RecentTrans/RecentTrans';
+
+// Actions
+import { fetchTransactionsIfNeeded } from '../../actions';
+
+// Styling
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import RecentTrans from '../RecentTrans/RecentTrans';
 import './App.css';
-import { fetchTransactionsIfNeeded } from '../../actions';
 
 class App extends Component {
 
