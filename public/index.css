@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "Rubik";
+    src: url(../../assets/Rubik-Regular.ttf);
+  }
+
 html, body, #root {
+    font-family: Rubik;
     height: 100%
 }

@@ -1,12 +1,18 @@
+// React + Redux
 import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+// Components
 import App from './containers/App/App';
+import Home from './containers/Home/Home';
+
+// Reducers
 import reducer from './reducers';
-// import { fetchTransactionsIfNeeded } from './actions';
 
 const middleware = [thunk]
 if (process.env.NODE_ENV !== 'production') {
@@ -18,12 +24,18 @@ const store = createStore(
   applyMiddleware(...middleware)
 );
 
-// store
-//   .dispatch(fetchTransactionsIfNeeded('5d746f6e8843a6305f774dbf'))
-//   .then(() => console.log(store.getState()))
+const routing = (
+  <Router>
+      <Route exact path="/" component={Home} />
+      <Route path="/app" component={App} />
+
+      {/* <Route path="/signin" component={SignIn} />
+      <Route path="/signup" component={SignUp} /> */}
+  </Router>
+);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    { routing }
   </Provider>, document.getElementById('root')
 );

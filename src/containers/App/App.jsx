@@ -1,6 +1,7 @@
 // React + Redux
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 // Components
 import TopNav from '../../components/Nav/TopNav';
@@ -43,12 +44,14 @@ class App extends Component {
             <SideNav />
           </Col>
           <Col>
-            <TopNav />
-            {isEmpty ? (isFetching ? <h2>Loading...</h2> : <h2>No Recent Transactions</h2>) :
-              <Container style={{ opacity: isFetching ? 0.5 : 1 }}>
-                <RecentTrans transactions={transactions} />
-              </Container>
-            }
+            <Container>
+              <TopNav />
+              {isEmpty ? (isFetching ? <h2>Loading...</h2> : <h2>No Recent Transactions</h2>) :
+                <Container style={{ opacity: isFetching ? 0.5 : 1 }}>
+                  <RecentTrans transactions={transactions} />
+                </Container>
+              }
+            </Container>
           </Col>
         </Row>
       </div>

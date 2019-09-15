@@ -7,9 +7,7 @@ const SideNav = () => (
   <div className='SideNav'>
     <Navbar collapseOnSelect expand="md" fixed="left" className="navigation">
       <Nav fill variant="pills" defaultActiveKey="#overview" className="flex-column links" >
-        <Nav.Link>
-          <Navbar.Brand href="/">ANTHROPOS</Navbar.Brand>
-        </Nav.Link>
+        <Navbar.Brand href="/">ANTHROPOS</Navbar.Brand>
         <Nav.Link href="#overview">Overview</Nav.Link>
         <Nav.Link href="#transactions" eventKey="transactions">Transactions</Nav.Link>
         <Nav.Link href="#payments" eventKey="payments">Payments</Nav.Link>
