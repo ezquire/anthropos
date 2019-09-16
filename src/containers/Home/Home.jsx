@@ -8,6 +8,7 @@ const Home = () => (
       <h1>Welcome To Anthropos</h1>
       <h3>Banking for a Better Future</h3>
     </div>
+    <SignIn />
     <ul class="slideshow">
       <li></li>
       <li></li>
@@ -15,7 +16,6 @@ const Home = () => (
       <li></li>
       <li></li>
     </ul>
-    <SignIn classN/>
   </div>
 );
 
