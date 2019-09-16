@@ -9,7 +9,7 @@ const Home = () => (
       <h3>Banking for a Better Future</h3>
     </div>
     <SignIn />
-    <ul class="slideshow">
+    <ul className="slideshow">
       <li></li>
       <li></li>
       <li></li>
