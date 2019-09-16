@@ -1,5 +1,5 @@
 import {
-  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS
+  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS, SIGNED_IN
 } from '../constants'; 
 
 export const requestTransactions = currentUser => ({
@@ -12,6 +12,11 @@ export const receiveTransactions = (currentUser, transactions) => ({
   currentUser,
   transactions,
   receivedAt: Date.now()
+});
+
+export const logUser = email => ({
+  type: SIGNED_IN,
+  email
 });
 
 const fetchTransactions = currentUser => dispatch => {

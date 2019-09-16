@@ -12,7 +12,7 @@ const TopNav = () => (
         <Nav.Link href="#pricing">Pricing</Nav.Link>
       </Nav>
       <Nav>
-        <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+        <Nav.Link href="/">Sign Out</Nav.Link>
       </Nav>
     </Navbar.Collapse>
   </Navbar>

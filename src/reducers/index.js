@@ -1,7 +1,16 @@
 import { combineReducers } from 'redux';
 import {
-  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS
+  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS, SIGNED_IN
 } from '../constants';
+
+const loggedUser = (state = { }, action) => {
+  switch (action.type) {
+    case SIGNED_IN:
+      return action.email
+    default:
+      return state
+  }
+}
 
 const transactions = (state = {
   isFetching: false,
@@ -42,6 +51,7 @@ const transactionsByUser = (state = { }, action) => {
 }
 
 const rootReducer = combineReducers({
+  loggedUser,
   transactionsByUser
 });
 

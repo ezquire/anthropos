@@ -2,17 +2,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-
 // Components
 import TopNav from '../../components/Nav/TopNav';
 import SideNav from '../../components/Nav/SideNav';
-
 // Containers
 import RecentTrans from '../RecentTrans/RecentTrans';
-
 // Actions
 import { fetchTransactionsIfNeeded } from '../../actions';
-
 // Styling
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';

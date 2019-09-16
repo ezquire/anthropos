@@ -20,10 +20,7 @@ const SignIn = () => (
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" />
       </Form.Group>
-      {/* <Form.Group controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Remember me" />
-      </Form.Group> */}
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" href="/app">
         Sign In
       </Button>
     </Form>
