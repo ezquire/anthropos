@@ -1,12 +1,12 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import './SignIn.css'
+import './SignUp.css'
 
-const SignIn = () => (
-  <div id="signin">
-    <h2>Sign In</h2>
-    <a href="/sign-up">Sign Up</a> 
+const SignUp = () => (
+  <div id="signup">
+    <h2>Sign Up</h2>
+    <a href="/">Sign In</a> 
     <Form className="form">
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
@@ -20,11 +20,11 @@ const SignIn = () => (
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" />
       </Form.Group>
-      <Button variant="primary" type="submit" href="/app">
-        Sign In
+      <Button variant="primary" type="submit" href="/app/create-user">
+        Sign Up
       </Button>
     </Form>
   </div>
 );
 
-export default SignIn;
+export default SignUp;

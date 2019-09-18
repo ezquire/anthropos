@@ -22,12 +22,12 @@ class App extends Component {
     dispatch(fetchTransactionsIfNeeded(currentUser));
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.currentUser !== this.props.currentUser) {
-      const { dispatch, currentUser } = this.props;
-      dispatch(fetchTransactionsIfNeeded(currentUser));
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.currentUser !== this.props.currentUser) {
+  //     const { dispatch, currentUser } = this.props;
+  //     dispatch(fetchTransactionsIfNeeded(currentUser));
+  //   }
+  // }
 
   render() {
     const { transactions, isFetching } = this.props;

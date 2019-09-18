@@ -39,10 +39,8 @@ firebaseApp.auth().onAuthStateChanged(user => {
 const routing = (
   <Router>
       <Route exact path="/" component={Home} />
+      <Route path="/sign-up" component={Home} />
       <Route path="/app" component={App} />
-
-      {/* <Route path="/signin" component={SignIn} />
-      <Route path="/signup" component={SignUp} /> */}
   </Router>
 );
 
