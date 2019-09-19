@@ -1,13 +1,12 @@
 // React + Redux
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { Route } from "react-router-dom";
 // Components
 import TopNav from '../../components/Nav/TopNav';
 import SideNav from '../../components/Nav/SideNav';
 // Containers
 import Overview from '../Overview/Overview';
-// Actions
-// import { fetchTransactionsIfNeeded } from '../../actions';
+import Accounts from '../Accounts/Accounts';
 // Styling
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
@@ -16,22 +15,7 @@ import './App.css';
 
 class App extends Component {
 
-  // componentDidMount() {
-  //   const { dispatch, currentUser } = this.props;
-  //   dispatch(fetchTransactionsIfNeeded(currentUser));
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.currentUser !== this.props.currentUser) {
-  //     const { dispatch, currentUser } = this.props;
-  //     dispatch(fetchTransactionsIfNeeded(currentUser));
-  //   }
-  // }
-
   render() {
-    // const { transactions, isFetching } = this.props;
-    // const isEmpty = transactions.length === 0;
-    // console.log("transactions in App.jsx:", transactions);
     return (
       <div className="App">
         <Row style={{ height: "100%" }} noGutters="true">
@@ -41,12 +25,10 @@ class App extends Component {
           <Col>
             <Container>
               <TopNav />
-              {/* {isEmpty ? (isFetching ? <h2>Loading...</h2> : <h2>No Recent Transactions</h2>) :
-                <Container style={{ opacity: isFetching ? 0.5 : 1 }}>
-                  <RecentTrans transactions={transactions} />
-                </Container>
-              } */}
-              <Overview />
+              <Route exact path="/app" component={Overview} />
+              <Route path="/app/accounts" component={Accounts} />
+              {/* <Route path="/app/transactions" component={Transactions} /> */}
+              {/* <Route path="/app/payments" component={Payments} /> */}
             </Container>
           </Col>
         </Row>

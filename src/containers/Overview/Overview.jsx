@@ -1,6 +1,7 @@
 // React + Redux
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 // Containers
 import RecentTrans from '../RecentTrans/RecentTrans';
 // Actions
@@ -58,4 +59,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Overview);
+export default withRouter(connect(mapStateToProps)(Overview));

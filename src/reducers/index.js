@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import {
-  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS, SIGNED_IN
+  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS, REQUEST_ACCOUNTS, RECEIVE_ACCOUNTS, SIGNED_IN
 } from '../constants';
 
 const loggedUser = (state = { }, action) => {
@@ -14,7 +14,6 @@ const loggedUser = (state = { }, action) => {
 
 const transactions = (state = {
   isFetching: false,
-  didInvalidate: false,
   items: []
 }, action) => {
   switch (action.type) {
@@ -22,13 +21,11 @@ const transactions = (state = {
       return {
         ...state,
         isFetching: true,
-        didInvalidate: false
       };
     case RECEIVE_TRANSACTIONS:
       return {
         ...state,
         isFetching: false,
-        didInvalidate: false,
         items: action.transactions,
         lastUpdated: action.receivedAt
       };
@@ -50,8 +47,44 @@ const transactionsByUser = (state = { }, action) => {
   }
 }
 
+const accounts = (state = {
+  isFetching: false,
+  items: []
+}, action) => {
+  switch (action.type) {
+    case REQUEST_ACCOUNTS:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case RECEIVE_ACCOUNTS:
+      return {
+        ...state,
+        isFetching: false,
+        items: action.accounts,
+        lastUpdated: action.receivedAt
+      };
+    default:
+      return state;
+  }
+}
+
+const accountsByUser = (state = { }, action) => {
+  switch (action.type) {
+    case RECEIVE_ACCOUNTS:
+    case REQUEST_ACCOUNTS:
+      return {
+        ...state,
+        [action.currentUser]: accounts(state[action.currentUser], action)
+      };
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   loggedUser,
+  accountsByUser,
   transactionsByUser
 });
 

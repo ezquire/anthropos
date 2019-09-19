@@ -10,7 +10,6 @@ const Home = ({ match }) => (
       <h1>Welcome To Anthropos</h1>
       <h3>Banking for a Better Future</h3>
     </div>
-    { console.log(match.url) }
     <Route exact path="/" component={SignIn} />
     <Route path="/sign-up" component={SignUp} />
     <ul className="slideshow">
