@@ -1,0 +1,11 @@
+.account {
+    text-align: left;
+}
+
+.nickname {
+    margin-left: 30px;
+}
+
+.amount {
+    float: right;
+}

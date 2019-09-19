@@ -6,7 +6,7 @@ import TopNav from '../../components/Nav/TopNav';
 import SideNav from '../../components/Nav/SideNav';
 // Containers
 import Overview from '../Overview/Overview';
-import AllAccounts from '../AllAccounts/AllAccounts';
+import AllAccounts from '../AccountsOverview/AccountsOverview';
 // Styling
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';

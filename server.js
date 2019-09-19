@@ -18,6 +18,7 @@ const port = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/public"));
 
 app.get('/api/test', (req, res) => {
   res.send({ express: 'successfully connected to the server.' });
@@ -40,11 +41,11 @@ app.get('/api/:user/recent-transactions', (req, res) => {
     .catch(error => console.log(error));
 });
 
-app.get('/api/:user/accounts'), (req, res) => {
+app.get('/api/:user/accounts', (req, res) => {
   client.getUser(req.params.user)
     .then(user => user.getAllUserNodes())
     .then(({ data }) => res.send(data))
     .catch(error => console.log(error));
-}
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
