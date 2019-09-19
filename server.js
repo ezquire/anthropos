@@ -40,4 +40,11 @@ app.get('/api/:user/recent-transactions', (req, res) => {
     .catch(error => console.log(error));
 });
 
+app.get('/api/:user/accounts'), (req, res) => {
+  client.getUser(req.params.user)
+    .then(user => user.getAllUserNodes())
+    .then(({ data }) => res.send(data))
+    .catch(error => console.log(error));
+}
+
 app.listen(port, () => console.log(`Listening on port ${port}`));

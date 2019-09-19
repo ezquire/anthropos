@@ -6,7 +6,7 @@ import TopNav from '../../components/Nav/TopNav';
 import SideNav from '../../components/Nav/SideNav';
 // Containers
 import Overview from '../Overview/Overview';
-import Accounts from '../Accounts/Accounts';
+import AllAccounts from '../AllAccounts/AllAccounts';
 // Styling
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
@@ -26,7 +26,7 @@ class App extends Component {
             <Container>
               <TopNav />
               <Route exact path="/app" component={Overview} />
-              <Route path="/app/accounts" component={Accounts} />
+              <Route path="/app/accounts" component={AllAccounts} />
               {/* <Route path="/app/transactions" component={Transactions} /> */}
               {/* <Route path="/app/payments" component={Payments} /> */}
             </Container>

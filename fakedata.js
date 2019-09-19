@@ -27,12 +27,17 @@ const client = new Client({
 //     .then(({ data }) => console.log(data))
 //     .catch(error => console.log(error))
 
-client.getUser('5d746f6e8843a6305f774dbf')
-  .then(user => user.triggerDummyTransactions('5d7ab1b80b8bf3010345e8bb'))
-  .then(({ data }) => console.log('data ', data))
-  .catch(error => console.log(error))
+// client.getUser('5d746f6e8843a6305f774dbf')
+//   .then(user => user.triggerDummyTransactions('5d7ab1b80b8bf3010345e8bb'))
+//   .then(({ data }) => console.log('data ', data))
+//   .catch(error => console.log(error))
 
 // client.getUser('5d746f6e8843a6305f774dbf')
 //   .then(user => user.getUserTransactions())
 //   .then(({ data }) => console.log(data.trans))
 //   .catch(error => console.log(error));
+
+// client.getUser('5d746f6e8843a6305f774dbf')
+// .then(user => user.getAllUserNodes())
+// .then(({ data }) => console.log(data))
+// .catch(error => console.log(error));

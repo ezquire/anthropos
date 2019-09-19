@@ -8,7 +8,6 @@ import RecentTrans from '../RecentTrans/RecentTrans';
 import { fetchTransactionsIfNeeded } from '../../actions';
 // Styling
 import Container from 'react-bootstrap/Container';
-import './Overview.css';
 
 class Overview extends Component {
 
@@ -17,17 +16,16 @@ class Overview extends Component {
     dispatch(fetchTransactionsIfNeeded(currentUser));
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.currentUser !== this.props.currentUser) {
-      const { dispatch, currentUser } = this.props;
-      dispatch(fetchTransactionsIfNeeded(currentUser));
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.currentUser !== this.props.currentUser) {
+  //     const { dispatch, currentUser } = this.props;
+  //     dispatch(fetchTransactionsIfNeeded(currentUser));
+  //   }
+  // }
 
   render() {
     const { transactions, isFetching } = this.props;
     const isEmpty = transactions.length === 0;
-    console.log("transactions in Overview.jsx:", transactions);
     return (
       <div className="Overview">
         {isEmpty ? (isFetching ? <h2>Loading...</h2> : <h2>No Recent Transactions</h2>) :
