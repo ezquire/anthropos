@@ -20,7 +20,7 @@ class AccountsOverview extends Component {
     const { accounts, isFetching } = this.props;
     const isEmpty = accounts.length === 0;
     return (
-      <div className="Accounts">
+      <div>
         {isEmpty ? (isFetching ? <h2>Loading...</h2> : <h2>No Accounts</h2>) :
           <Container style={{ opacity: isFetching ? 0.5 : 1 }}>
             <AllAccounts accounts={accounts} />
