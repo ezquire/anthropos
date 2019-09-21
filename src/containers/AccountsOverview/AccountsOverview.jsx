@@ -31,23 +31,24 @@ class AccountsOverview extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { currentUser = '5d746f6e8843a6305f774dbf', accountsByUser } = state;
-  const {
-    isFetching,
-    lastUpdated,
-    items: accounts
-  } = accountsByUser[currentUser] || {
-    isFetching: true,
-    items: []
-  }
+// const mapStateToProps = state => {
+//   const { currentUser = '5d746f6e8843a6305f774dbf', accountsByUser } = state;
+//   const {
+//     isFetching,
+//     lastUpdated,
+//     items: accounts
+//   } = accountsByUser[currentUser] || {
+//     isFetching: true,
+//     items: []
+//   }
 
-  return {
-    currentUser,
-    accounts,
-    isFetching,
-    lastUpdated
-  }
-}
+//   return {
+//     currentUser,
+//     accounts,
+//     isFetching,
+//     lastUpdated
+//   }
+// }
 
-export default withRouter(connect(mapStateToProps)(AccountsOverview));
+export default AccountsOverview;
+// export default withRouter(connect(mapStateToProps)(AccountsOverview));

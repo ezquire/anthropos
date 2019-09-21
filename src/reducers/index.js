@@ -3,7 +3,7 @@ import {
   REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS, REQUEST_ACCOUNTS, RECEIVE_ACCOUNTS, SIGNED_IN
 } from '../constants';
 
-const loggedUser = (state = { }, action) => {
+const loggedUser = (state = {}, action) => {
   switch (action.type) {
     case SIGNED_IN:
       return action.email
@@ -12,9 +12,10 @@ const loggedUser = (state = { }, action) => {
   }
 }
 
-const transactions = (state = {
+const info = (state = {
   isFetching: false,
-  items: []
+  transactions: [],
+  accounts: []
 }, action) => {
   switch (action.type) {
     case REQUEST_TRANSACTIONS:
@@ -22,11 +23,23 @@ const transactions = (state = {
         ...state,
         isFetching: true,
       };
+    case REQUEST_ACCOUNTS:
+      return {
+        ...state,
+        isFetching: true
+      }
     case RECEIVE_TRANSACTIONS:
       return {
         ...state,
         isFetching: false,
-        items: action.transactions,
+        transactions: action.transactions,
+        lastUpdated: action.receivedAt
+      };
+    case RECEIVE_ACCOUNTS:
+      return {
+        ...state,
+        isFetching: false,
+        accounts: action.accounts,
         lastUpdated: action.receivedAt
       };
     default:
@@ -34,48 +47,49 @@ const transactions = (state = {
   }
 }
 
-const transactionsByUser = (state = { }, action) => {
+const transactionsByUser = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_TRANSACTIONS:
     case REQUEST_TRANSACTIONS:
       return {
         ...state,
-        [action.currentUser]: transactions(state[action.currentUser], action)
+        [action.currentUser]: info(state[action.currentUser], action)
       };
     default:
       return state;
   }
 }
 
-const accounts = (state = {
-  isFetching: false,
-  items: []
-}, action) => {
-  switch (action.type) {
-    case REQUEST_ACCOUNTS:
-      return {
-        ...state,
-        isFetching: true,
-      };
-    case RECEIVE_ACCOUNTS:
-      return {
-        ...state,
-        isFetching: false,
-        items: action.accounts,
-        lastUpdated: action.receivedAt
-      };
-    default:
-      return state;
-  }
-}
+// const accounts = (state = {
+//   isFetching: false,
+//   accounts: []
+// }, action) => {
+//   switch (action.type) {
+//     case REQUEST_ACCOUNTS:
+//       return {
+//         ...state,
+//         isFetching: true,
+//       };
+//     case RECEIVE_ACCOUNTS:
+//       return {
+//         ...state,
+//         isFetching: false,
+//         accounts: action.accounts,
+//         transactions: [],
+//         lastUpdated: action.receivedAt
+//       };
+//     default:
+//       return state;
+//   }
+// }
 
-const accountsByUser = (state = { }, action) => {
+const accountsByUser = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_ACCOUNTS:
     case REQUEST_ACCOUNTS:
       return {
         ...state,
-        [action.currentUser]: accounts(state[action.currentUser], action)
+        [action.currentUser]: info(state[action.currentUser], action)
       };
     default:
       return state;
