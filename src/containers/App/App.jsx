@@ -13,9 +13,6 @@ import TopNav from '../../components/Nav/TopNav';
 import SideNav from '../../components/Nav/SideNav';
 import RecentTrans from '../RecentTrans/RecentTrans';
 import AllAccounts from '../AllAccounts/AllAccounts';
-// Containers
-// import Overview from '../Overview/Overview';
-// import AllAccounts from '../AccountsOverview/AccountsOverview';
 // Styling
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
@@ -29,11 +26,6 @@ class App extends Component {
     dispatch(fetchTransactionsIfNeeded(currentUser));
     dispatch(fetchAccountsIfNeeded(currentUser));
   }
-
-  // componentDidUpdate() {
-  //   const { dispatch, currentUser } = this.props;
-  //   dispatch(fetchAccountsIfNeeded(currentUser));
-  // }
 
   render() {
     const { accounts, transactions, isFetchingAccounts, isFetchingTransactions } = this.props;
@@ -78,7 +70,7 @@ class App extends Component {
 const mapStateToProps = state => {
   console.log("state:", state);
   const { currentUser = '5d746f6e8843a6305f774dbf', transactionsByUser, accountsByUser } = state;
-  
+
   const {
     isFetchingTransactions,
     lastUpdatedTransactions,
@@ -91,7 +83,7 @@ const mapStateToProps = state => {
   const {
     isFetchingAccounts,
     lastUpdatedAccounts,
-    accounts 
+    accounts
   } = accountsByUser[currentUser] || {
     isFetchingAccounts: true,
     accounts: []

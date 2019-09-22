@@ -41,3 +41,7 @@ const client = new Client({
 // .then(user => user.getAllUserNodes())
 // .then(({ data }) => console.log(data.nodes[0].info))
 // .catch(error => console.log(error));
+
+
+client.getUser('5d746f6e8843a6305f774dbf')
+  .then(user => console.log(user.body.logins));
