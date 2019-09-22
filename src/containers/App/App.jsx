@@ -27,18 +27,19 @@ class App extends Component {
   componentDidMount() {
     const { dispatch, currentUser } = this.props;
     dispatch(fetchTransactionsIfNeeded(currentUser));
-  }
-
-  componentDidUpdate() {
-    const { dispatch, currentUser } = this.props;
     dispatch(fetchAccountsIfNeeded(currentUser));
   }
 
+  // componentDidUpdate() {
+  //   const { dispatch, currentUser } = this.props;
+  //   dispatch(fetchAccountsIfNeeded(currentUser));
+  // }
+
   render() {
-    const { accounts, transactions, isFetching } = this.props;
-    console.log("in render: ", this.props);
-    const isEmpty = false;
-    //accounts.length === 0 && transactions.length === 0;
+    const { accounts, transactions, isFetchingAccounts, isFetchingTransactions } = this.props;
+    const isEmpty = accounts.length === 0 || transactions.length === 0;
+    const isFetching = (isFetchingAccounts || isFetchingTransactions);
+
     return (
       <div className="App">
         <Row style={{ height: "100%" }} noGutters="true">
@@ -77,14 +78,22 @@ class App extends Component {
 const mapStateToProps = state => {
   console.log("state:", state);
   const { currentUser = '5d746f6e8843a6305f774dbf', transactionsByUser, accountsByUser } = state;
+  
   const {
-    isFetching,
-    lastUpdated,
+    isFetchingTransactions,
+    lastUpdatedTransactions,
     transactions,
-    accounts
-  } = (transactionsByUser[currentUser] && accountsByUser[currentUser]) || {
-    isFetching: true,
-    transactions: [],
+  } = transactionsByUser[currentUser] || {
+    isFetchingTransactions: true,
+    transactions: []
+  }
+
+  const {
+    isFetchingAccounts,
+    lastUpdatedAccounts,
+    accounts 
+  } = accountsByUser[currentUser] || {
+    isFetchingAccounts: true,
     accounts: []
   }
 
@@ -92,8 +101,10 @@ const mapStateToProps = state => {
     currentUser,
     transactions,
     accounts,
-    isFetching,
-    lastUpdated
+    isFetchingTransactions,
+    isFetchingAccounts,
+    lastUpdatedTransactions,
+    lastUpdatedAccounts
   }
 }
 

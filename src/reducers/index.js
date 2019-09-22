@@ -13,7 +13,8 @@ const loggedUser = (state = {}, action) => {
 }
 
 const info = (state = {
-  isFetching: false,
+  isFetchingTransactions: false,
+  isFetchingAccounts: false,
   transactions: [],
   accounts: []
 }, action) => {
@@ -21,24 +22,24 @@ const info = (state = {
     case REQUEST_TRANSACTIONS:
       return {
         ...state,
-        isFetching: true,
+        isFetchingTransactions: true,
       };
     case REQUEST_ACCOUNTS:
       return {
         ...state,
-        isFetching: true
+        isFetchingAccounts: true
       }
     case RECEIVE_TRANSACTIONS:
       return {
         ...state,
-        isFetching: false,
+        isFetchingTransactions: false,
         transactions: action.transactions,
         lastUpdated: action.receivedAt
       };
     case RECEIVE_ACCOUNTS:
       return {
         ...state,
-        isFetching: false,
+        isFetchingAccounts: false,
         accounts: action.accounts,
         lastUpdated: action.receivedAt
       };
@@ -59,29 +60,6 @@ const transactionsByUser = (state = {}, action) => {
       return state;
   }
 }
-
-// const accounts = (state = {
-//   isFetching: false,
-//   accounts: []
-// }, action) => {
-//   switch (action.type) {
-//     case REQUEST_ACCOUNTS:
-//       return {
-//         ...state,
-//         isFetching: true,
-//       };
-//     case RECEIVE_ACCOUNTS:
-//       return {
-//         ...state,
-//         isFetching: false,
-//         accounts: action.accounts,
-//         transactions: [],
-//         lastUpdated: action.receivedAt
-//       };
-//     default:
-//       return state;
-//   }
-// }
 
 const accountsByUser = (state = {}, action) => {
   switch (action.type) {
