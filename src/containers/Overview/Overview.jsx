@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 import RecentTrans from '../RecentTrans/RecentTrans';
 // Actions
 import { fetchTransactionsIfNeeded } from '../../actions';
+
 // Styling
 import Container from 'react-bootstrap/Container';
 
@@ -31,6 +32,7 @@ class Overview extends Component {
         {isEmpty ? (isFetching ? <h2>Loading...</h2> : <h2>No Recent Transactions</h2>) :
           <Container style={{ opacity: isFetching ? 0.5 : 1 }}>
             <RecentTrans transactions={transactions} />
+            <AllAccounts accounts={accounts} />
           </Container>
         }
       </div>
@@ -39,7 +41,7 @@ class Overview extends Component {
 }
 
 const mapStateToProps = state => {
-  const { currentUser = '5d746f6e8843a6305f774dbf', transactionsByUser } = state;
+  const { currentUser = '5d746f6e8843a6305f774dbf', transactionsByUser, accountsByUser } = state;
   const {
     isFetching,
     lastUpdated,
@@ -57,4 +59,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Overview));
+export default Overview;
+// export default withRouter(connect(mapStateToProps)(Overview));

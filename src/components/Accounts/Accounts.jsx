@@ -8,12 +8,12 @@ const capitalize = (name) => {
   return name.toLowerCase()
     .split(' ')
     .map((s) => s[0].toUpperCase() + s.substring(1))
-    .join(' ')
+    .join(' ');
 }
 
 const formatBalance = (balance) => {
   let amount = ""
-  if(balance.currency === 'USD') {
+  if (balance.currency === 'USD') {
     amount += '$'
   }
   amount += balance.amount;
@@ -22,33 +22,34 @@ const formatBalance = (balance) => {
 
 const Accounts = ({ accounts }) => (
   <div>
-    {
-      accounts.map((account, i) => (
-        <Table responsive className="accountTable">
-          <thead>
-            <tr className="head">
-              <th>Number</th>
-              <th>Name</th>
-              <th>Bank</th>
-              <th>Type</th>
-              <th>Balance</th>
-            </tr>
-          </thead>
-          <tbody>
+    {console.log()}
+    <Table responsive className="accountTable">
+      <thead>
+        <tr className="head">
+          <th>Number</th>
+          <th>Name</th>
+          <th>Bank</th>
+          <th>Type</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          accounts.map((account, i) => (
             <tr key={i}>
-              <td>{account.info.account_num}</td>
-              <td>{account.info.nickname}</td>
-              <td>
+              <td key={i + 1}>{account.info.account_num}</td>
+              <td key={i + 2}>{account.info.nickname}</td>
+              <td key={i + 3}>
                 {capitalize(account.info.bank_name)}&nbsp;
-                <img src={account.info.bank_logo} alt="logo" className="logo"/>   
+                <img src={account.info.bank_logo} alt="logo" className="logo" />
               </td>
-              <td>{capitalize(account.info.class)}</td>
-              <td>{formatBalance(account.info.balance)}</td>
+              <td key={i + 4}>{capitalize(account.info.class)}</td>
+              <td key={i + 5}>{formatBalance(account.info.balance)}</td>
             </tr>
-          </tbody>
-        </Table>
-      ))
-    }
+          ))
+        }
+      </tbody>
+    </Table>
   </div>
 );
 
