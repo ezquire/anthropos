@@ -13,6 +13,20 @@ const client = new Client({
   isProduction: false
 });
 
+// This method is very slow, I would not use this in production, but
+// for time's sake I am resorting to brute force
+const findUser = (email, users) => {
+  for (let i = 0; i < users.length; ++i) {
+    for (let j = 0; j < users[i].logins.length; ++i) {
+      if (users[i].logins[j].email === email) {
+        return users[i]._id;
+      } else {
+        return "";
+      }
+    }
+  }
+}
+
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -27,6 +41,13 @@ app.get('/api/test', (req, res) => {
 app.get('/api/:user', (req, res) => {
   client.getUser(req.params.user)
     .then(user => res.send(user))
+    .catch(error => console.log(error));
+});
+
+app.get('/api/user-by-email/:email', (req, res) => {
+  client.getAllUsers()
+    .then(({ data }) => findUser(req.params.email, data.users))
+    .then(id => res.send({ id }))
     .catch(error => console.log(error));
 });
 

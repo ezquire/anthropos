@@ -1,12 +1,26 @@
 import { combineReducers } from 'redux';
 import {
-  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS, REQUEST_ACCOUNTS, RECEIVE_ACCOUNTS, SIGNED_IN
+  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS, REQUEST_ACCOUNTS, RECEIVE_ACCOUNTS, LOGIN_REQUEST,LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT
 } from '../constants';
 
-const loggedUser = (state = {}, action) => {
+const authentication = (state = {}, action) => {
   switch (action.type) {
-    case SIGNED_IN:
-      return action.email
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        authenticating: true,
+        currentUser: action.currentUser
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        loggedIn: true,
+        currentUser: action.currentUser
+      };
+    case LOGIN_FAILURE:
+      return {};
+    case LOGOUT:
+      return {};
     default:
       return state
   }
@@ -75,7 +89,7 @@ const accountsByUser = (state = {}, action) => {
 }
 
 const rootReducer = combineReducers({
-  loggedUser,
+  authentication,
   accountsByUser,
   transactionsByUser
 });

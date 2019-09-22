@@ -1,12 +1,10 @@
 // React + Redux
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
-import { Route } from "react-router-dom";
+import { Route, withRouter } from 'react-router-dom'
 // Actions
 import {
-  fetchTransactionsIfNeeded,
-  fetchAccountsIfNeeded
+  fetchTransactionsIfNeeded, fetchAccountsIfNeeded
 } from '../../actions';
 // Components
 import TopNav from '../../components/Nav/TopNav';
@@ -22,15 +20,15 @@ import './App.css';
 class App extends Component {
 
   componentDidMount() {
-    const { dispatch, currentUser } = this.props;
-    dispatch(fetchTransactionsIfNeeded(currentUser));
-    dispatch(fetchAccountsIfNeeded(currentUser));
+    const { dispatch, authentication} = this.props;
+    dispatch(fetchTransactionsIfNeeded(authentication.currentUser));
+    dispatch(fetchAccountsIfNeeded(authentication.currentUser));
   }
 
   render() {
     const { accounts, transactions, isFetchingAccounts, isFetchingTransactions } = this.props;
     const isEmpty = accounts.length === 0 || transactions.length === 0;
-    const isFetching = (isFetchingAccounts || isFetchingTransactions);
+    const isFetching = isFetchingAccounts || isFetchingTransactions;
 
     return (
       <div className="App">
@@ -52,13 +50,9 @@ class App extends Component {
                       path="/app/accounts"
                       render={(props) => <AllAccounts {...props} accounts={accounts} />}
                     />
-                    {/* <RecentTrans transactions={transactions} />
-                    <AllAccounts accounts={accounts} /> */}
                   </Container>
                 }
               </div>
-              {/* <Route exact path="/app" component={Overview} />
-              <Route path="/app/accounts" component={AllAccounts} /> */}
             </Container>
           </Col>
         </Row>
@@ -68,14 +62,13 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state:", state);
-  const { currentUser = '5d746f6e8843a6305f774dbf', transactionsByUser, accountsByUser } = state;
+  const { authentication, transactionsByUser, accountsByUser } = state;
 
   const {
     isFetchingTransactions,
     lastUpdatedTransactions,
     transactions,
-  } = transactionsByUser[currentUser] || {
+  } = transactionsByUser[authentication.currentUser] || {
     isFetchingTransactions: true,
     transactions: []
   }
@@ -84,13 +77,13 @@ const mapStateToProps = state => {
     isFetchingAccounts,
     lastUpdatedAccounts,
     accounts
-  } = accountsByUser[currentUser] || {
+  } = accountsByUser[authentication.currentUser] || {
     isFetchingAccounts: true,
     accounts: []
   }
 
   return {
-    currentUser,
+    authentication,
     transactions,
     accounts,
     isFetchingTransactions,

@@ -9,12 +9,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 // Components
 import App from './containers/App/App';
 import Home from './containers/Home/Home';
-// Actions
-import { logUser } from './actions'
 // Reducers
 import reducer from './reducers';
-// Firebase
-import { firebaseApp } from './firebase';
 
 const middleware = [thunk]
 if (process.env.NODE_ENV !== 'production') {
@@ -26,15 +22,15 @@ const store = createStore(
   applyMiddleware(...middleware)
 );
 
-firebaseApp.auth().onAuthStateChanged(user => {
-  if(user) {
-    console.log('user has signed in or signed up', user);
-    const { email } = user;
-    store.dispatch(logUser(email));
-  } else {
-    console.log('user hasn\'t signed up, or has signed out');
-  }
-});
+// firebaseApp.auth().onAuthStateChanged(user => {
+//   if(user) {
+//     console.log('user has signed in or signed up', user);
+//     const { email } = user;
+//     store.dispatch(logUser(email));
+//   } else {
+//     console.log('user hasn\'t signed up, or has signed out');
+//   }
+// });
 
 const routing = (
   <Router>

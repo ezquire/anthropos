@@ -1,4 +1,6 @@
+// React + Redux
 import React from 'react';
+// Styling
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import './SignUp.css'
