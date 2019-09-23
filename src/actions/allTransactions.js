@@ -7,10 +7,10 @@ export const requestAllTransactions = currentUser => ({
   currentUser
 });
 
-export const receiveAllTransactions = (currentUser, transactions) => ({
+export const receiveAllTransactions = (currentUser, allTransactions) => ({
   type: RECEIVE_ALL_TRANSACTIONS,
   currentUser,
-  transactions,
+  allTransactions,
   receivedAt: Date.now()
 });
 

@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   render() {
-    const { accounts, transactions, alltransactions, authentication, isFetchingAccounts, isFetchingTransactions, isFetchingAllTransactions } = this.props;
+    const { accounts, transactions, allTransactions, authentication, isFetchingAccounts, isFetchingTransactions, isFetchingAllTransactions } = this.props;
     const isEmpty = accounts.length === 0 || transactions.length === 0;
     const isFetching = isFetchingAccounts || isFetchingTransactions || isFetchingAllTransactions;
 
@@ -54,7 +54,7 @@ class App extends Component {
                     />
                     <Route
                       path="/app/all-transactions"
-                      render={(props) => <AllTrans {...props} alltransactions={alltransactions} />}
+                      render={(props) => <AllTrans {...props} allTransactions={allTransactions} />}
                     />
                   </Container>
                 }

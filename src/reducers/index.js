@@ -32,7 +32,7 @@ const info = (state = {
   isFetchingAllTransactions: false,
   isFetchingAccounts: false,
   transactions: [],
-  alltransactions: [],
+  allTransactions: [],
   accounts: []
 }, action) => {
   switch (action.type) {
@@ -62,7 +62,7 @@ const info = (state = {
       return {
         ...state,
         isFetchingAllTransactions: false,
-        alltransactions: action.alltransactions,
+        allTransactions: action.allTransactions,
         lastUpdated: action.receivedAt
       };
     case RECEIVE_ACCOUNTS:

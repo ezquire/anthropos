@@ -17,9 +17,9 @@ const SideNav = () => (
         <LinkContainer to="/app/accounts" activeClassName="active">
           <Nav.Link>Accounts</Nav.Link>
         </LinkContainer>
-        {/* <LinkContainer to="/app/all-transactions" activeClassName="active">
+        <LinkContainer to="/app/all-transactions" activeClassName="active">
           <Nav.Link>Transactions</Nav.Link>
-        </LinkContainer> */}
+        </LinkContainer>
       </Nav>
     </Navbar>
   </div>
