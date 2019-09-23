@@ -22,7 +22,7 @@ const fetchAllTransactions = currentUser => dispatch => {
 }
 
 const shouldFetchAllTransactions = (state, currentUser) => {
-  const transactions = state.fetchAllTransactions[currentUser];
+  const transactions = state.allTransactionsByUser[currentUser];
   if (!transactions) {
     return true;
   }

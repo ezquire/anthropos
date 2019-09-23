@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import {
-  REQUEST_TRANSACTIONS, RECEIVE_TRANSACTIONS, REQUEST_ACCOUNTS, RECEIVE_ACCOUNTS, LOGIN_REQUEST,LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT
+  REQUEST_TRANSACTIONS, REQUEST_ALL_TRANSACTIONS, RECEIVE_ALL_TRANSACTIONS, RECEIVE_TRANSACTIONS, REQUEST_ACCOUNTS, RECEIVE_ACCOUNTS, LOGIN_REQUEST, 
+  LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT
 } from '../constants';
 
 const authentication = (state = {}, action) => {
@@ -28,8 +29,10 @@ const authentication = (state = {}, action) => {
 
 const info = (state = {
   isFetchingTransactions: false,
+  isFetchingAllTransactions: false,
   isFetchingAccounts: false,
   transactions: [],
+  alltransactions: [],
   accounts: []
 }, action) => {
   switch (action.type) {
@@ -37,6 +40,11 @@ const info = (state = {
       return {
         ...state,
         isFetchingTransactions: true,
+      };
+    case REQUEST_ALL_TRANSACTIONS:
+      return {
+        ...state,
+        isFetchingAllTransactions: true,
       };
     case REQUEST_ACCOUNTS:
       return {
@@ -48,6 +56,13 @@ const info = (state = {
         ...state,
         isFetchingTransactions: false,
         transactions: action.transactions,
+        lastUpdated: action.receivedAt
+      };
+    case RECEIVE_ALL_TRANSACTIONS:
+      return {
+        ...state,
+        isFetchingAllTransactions: false,
+        alltransactions: action.alltransactions,
         lastUpdated: action.receivedAt
       };
     case RECEIVE_ACCOUNTS:
@@ -75,6 +90,19 @@ const transactionsByUser = (state = {}, action) => {
   }
 }
 
+const allTransactionsByUser = (state = {}, action) => {
+  switch (action.type) {
+    case RECEIVE_ALL_TRANSACTIONS:
+    case REQUEST_ALL_TRANSACTIONS:
+      return {
+        ...state,
+        [action.currentUser]: info(state[action.currentUser], action)
+      };
+    default:
+      return state;
+  }
+}
+
 const accountsByUser = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_ACCOUNTS:
@@ -91,7 +119,8 @@ const accountsByUser = (state = {}, action) => {
 const rootReducer = combineReducers({
   authentication,
   accountsByUser,
-  transactionsByUser
+  transactionsByUser,
+  allTransactionsByUser
 });
 
 export default rootReducer;

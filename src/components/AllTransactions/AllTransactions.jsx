@@ -35,10 +35,10 @@ const formatTransactionAmount = ({ transaction }) => {
   return amount;
 }
 
-const AllTransactions = ({ transactions }) => (
+const AllTransactions = ({ alltransactions }) => (
   <div>
     {
-      transactions.map((transaction, i) => (
+      alltransactions.map((transaction, i) => (
         <div key={i}>
           <div className="transaction">
             <span className="date">{formatTransactionDate({ transaction })}</span>

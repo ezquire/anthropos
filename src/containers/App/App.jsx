@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom'
 // Actions
 import {
-  fetchTransactionsIfNeeded, fetchAccountsIfNeeded
+  fetchTransactionsIfNeeded, fetchAccountsIfNeeded, fetchAllTransactionsIfNeeded
 } from '../../actions';
 // Components
 import TopNav from '../../components/Nav/TopNav';
 import SideNav from '../../components/Nav/SideNav';
 import RecentTrans from '../RecentTrans/RecentTrans';
+import AllTrans from '../AllTrans/AllTrans';
 import AllAccounts from '../AllAccounts/AllAccounts';
 // Styling
 import Container from 'react-bootstrap/Container';
@@ -23,12 +24,13 @@ class App extends Component {
     const { dispatch, authentication } = this.props;
     dispatch(fetchTransactionsIfNeeded(authentication.currentUser));
     dispatch(fetchAccountsIfNeeded(authentication.currentUser));
+    dispatch(fetchAllTransactionsIfNeeded(authentication.currentUser));
   }
 
   render() {
-    const { accounts, transactions, authentication, isFetchingAccounts, isFetchingTransactions } = this.props;
+    const { accounts, transactions, alltransactions, authentication, isFetchingAccounts, isFetchingTransactions, isFetchingAllTransactions } = this.props;
     const isEmpty = accounts.length === 0 || transactions.length === 0;
-    const isFetching = isFetchingAccounts || isFetchingTransactions;
+    const isFetching = isFetchingAccounts || isFetchingTransactions || isFetchingAllTransactions;
 
     return (
       <div className="App">
@@ -40,7 +42,7 @@ class App extends Component {
             <Container>
               <TopNav />
               <div className="Container">
-                {isEmpty ? (isFetching ? <h2>Loading...</h2> : <h2>No Recent Transactions</h2>) :
+                {isEmpty ? (isFetching ? <h2>Loading...</h2> : <h2>No Recent</h2>) :
                   <Container style={{ opacity: isFetching ? 0.5 : 1 }}>
                     <Route
                       exact path="/app"
@@ -49,6 +51,10 @@ class App extends Component {
                     <Route
                       path="/app/accounts"
                       render={(props) => <AllAccounts {...props} accounts={accounts} />}
+                    />
+                    <Route
+                      path="/app/all-transactions"
+                      render={(props) => <AllTrans {...props} alltransactions={alltransactions} />}
                     />
                   </Container>
                 }
@@ -62,7 +68,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { authentication, transactionsByUser, accountsByUser } = state;
+  const { authentication, transactionsByUser, accountsByUser, allTransactionsByUser } = state;
 
   const {
     isFetchingTransactions,
@@ -74,6 +80,15 @@ const mapStateToProps = state => {
   }
 
   const {
+    isFetchingAllTransactions,
+    lastUpdatedAllTransactions,
+    allTransactions,
+  } = allTransactionsByUser[authentication.currentUser] || {
+    isFetchingAllTransactions: true,
+    allTransactions: []
+  }
+
+  const {
     isFetchingAccounts,
     lastUpdatedAccounts,
     accounts
@@ -82,13 +97,17 @@ const mapStateToProps = state => {
     accounts: []
   }
 
+
   return {
     authentication,
     transactions,
     accounts,
+    allTransactions,
     isFetchingTransactions,
+    isFetchingAllTransactions,
     isFetchingAccounts,
     lastUpdatedTransactions,
+    lastUpdatedAllTransactions,
     lastUpdatedAccounts
   }
 }
