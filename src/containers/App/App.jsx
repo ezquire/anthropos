@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   render() {
-    const { accounts, transactions, isFetchingAccounts, isFetchingTransactions } = this.props;
+    const { accounts, transactions, authentication, isFetchingAccounts, isFetchingTransactions } = this.props;
     const isEmpty = accounts.length === 0 || transactions.length === 0;
     const isFetching = isFetchingAccounts || isFetchingTransactions;
 
@@ -44,7 +44,7 @@ class App extends Component {
                   <Container style={{ opacity: isFetching ? 0.5 : 1 }}>
                     <Route
                       exact path="/app"
-                      render={(props) => <RecentTrans {...props} transactions={transactions} />}
+                      render={(props) => <RecentTrans {...props} transactions={transactions} user={authentication.currentUser}/>}
                     />
                     <Route
                       path="/app/accounts"

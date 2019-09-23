@@ -44,6 +44,12 @@ app.get('/api/:user', (req, res) => {
     .catch(error => console.log(error));
 });
 
+app.get('/api/:user/name', (req, res) => {
+  client.getUser(req.params.user)
+    .then(user => res.send(user.legal_names[0]))
+    .catch(error => console.log(error));
+});
+
 app.get('/api/user-by-email/:email', (req, res) => {
   client.getAllUsers()
     .then(({ data }) => findUser(req.params.email, data.users))
@@ -58,6 +64,13 @@ app.get('/api/:user/recent-transactions', (req, res) => {
   }
   client.getUser(req.params.user)
     .then(user => user.getUserTransactions(options))
+    .then(({ data }) => res.send(data))
+    .catch(error => console.log(error));
+});
+
+app.get('/api/:user/all-transactions', (req, res) => {
+  client.getUser(req.params.user)
+    .then(user => user.getUserTransactions())
     .then(({ data }) => res.send(data))
     .catch(error => console.log(error));
 });
