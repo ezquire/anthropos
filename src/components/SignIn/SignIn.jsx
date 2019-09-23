@@ -30,7 +30,7 @@ class SignIn extends Component {
     event.preventDefault();
     const { email, password } = this.state;
     const { dispatch } = this.props;
-    if(email && password) {
+    if (email && password) {
       dispatch(authenticateUser(email, password));
     }
   }
@@ -44,11 +44,11 @@ class SignIn extends Component {
         <Form className="form" onSubmit={this.handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" 
-                          placeholder="Enter email" 
-                          name="email"
-                          value={email}
-                          onChange={this.handleChange}
+            <Form.Control type="email"
+              placeholder="Enter email"
+              name="email"
+              value={email}
+              onChange={this.handleChange}
             />
             <Form.Text>
               We'll never share your email with anyone else.
@@ -56,18 +56,19 @@ class SignIn extends Component {
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" 
-                          placeholder="Password"
-                          name="password"
-                          value={password}
-                          onChange={this.handleChange}
+            <Form.Control type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={this.handleChange}
             />
           </Form.Group>
-          <Button variant="primary" type="submit"> 
+
+          <Button variant="primary" type="submit" path="/app">
             Sign In
           </Button>
         </Form>
-      </div>
+      </div >
     )
   }
 }

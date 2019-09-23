@@ -22,16 +22,6 @@ const store = createStore(
   applyMiddleware(...middleware)
 );
 
-// firebaseApp.auth().onAuthStateChanged(user => {
-//   if(user) {
-//     console.log('user has signed in or signed up', user);
-//     const { email } = user;
-//     store.dispatch(logUser(email));
-//   } else {
-//     console.log('user hasn\'t signed up, or has signed out');
-//   }
-// });
-
 const routing = (
   <Router>
       <Route exact path="/" component={Home} />
