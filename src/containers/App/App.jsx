@@ -19,9 +19,8 @@ import './App.css';
 
 class App extends Component {
 
-  componentDidMount() {
-    console.log(this.props);
-    const { dispatch, authentication} = this.props;
+  componentDidUpdate() {
+    const { dispatch, authentication } = this.props;
     dispatch(fetchTransactionsIfNeeded(authentication.currentUser));
     dispatch(fetchAccountsIfNeeded(authentication.currentUser));
   }

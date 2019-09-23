@@ -1,5 +1,6 @@
 // React + Redux
 import React from 'react';
+import { Link } from 'react-router-dom';
 // Styling
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -8,7 +9,7 @@ import './SignUp.css'
 const SignUp = () => (
   <div id="signup">
     <h2>Sign Up</h2>
-    <a href="/">Sign In</a> 
+    <Link to="/">Sign In</Link>
     <Form className="form">
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>

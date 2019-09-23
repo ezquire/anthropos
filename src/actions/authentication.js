@@ -26,7 +26,6 @@ export const logout = () => ({
 });
 
 const fetchUser = (email, password) => dispatch => {
-  dispatch(loginRequest(email));
   firebaseApp.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
       return fetch(`/api/user-by-email/${email}`)

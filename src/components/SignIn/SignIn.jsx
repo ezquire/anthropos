@@ -26,11 +26,12 @@ class SignIn extends Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
     const { email, password } = this.state;
     const { dispatch } = this.props;
     if (email && password) {
+      this.props.history.push("/app");
       dispatch(authenticateUser(email, password));
     }
   }
@@ -63,8 +64,7 @@ class SignIn extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-
-          <Button variant="primary" type="submit" path="/app">
+          <Button variant="primary" type="submit">
             Sign In
           </Button>
         </Form>
