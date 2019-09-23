@@ -5,9 +5,9 @@ import {
   LOGIN_FAILURE, LOGOUT
 } from '../constants';
 
-export const loginRequest = currentUser => ({
+export const loginRequest = email => ({
   type: LOGIN_REQUEST,
-  currentUser
+  email
 });
 
 export const loginSuccess = currentUser => ({
@@ -26,6 +26,7 @@ export const logout = () => ({
 });
 
 const fetchUser = (email, password) => dispatch => {
+  dispatch(loginRequest(email));
   firebaseApp.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
       return fetch(`/api/user-by-email/${email}`)
@@ -38,6 +39,15 @@ const fetchUser = (email, password) => dispatch => {
 
 }
 
+const handleLogout = () => dispatch => {
+  dispatch(logout());
+  firebaseApp.auth().logout();
+}
+
 export const authenticateUser = (email, password) => dispatch => {
   return dispatch(fetchUser(email, password));
+}
+
+export const logoutUser = () => dispatch => {
+  return dispatch(handleLogout());
 }
