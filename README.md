@@ -25,5 +25,6 @@ You will also see any lint errors in the console.
 
 #### Use these credentials to login to the application:
 Username/Email: test@synapsefi.com
+
 Password: password
 
