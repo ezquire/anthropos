@@ -1,5 +1,5 @@
 # anthropos
-Banking for a better future - My submission for Synapse FI
+Banking for a better future
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
